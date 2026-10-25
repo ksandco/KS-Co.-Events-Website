@@ -1,0 +1,22 @@
+[build]
+  command = "node scripts/build-production-site.mjs && node scripts/check-production-site.mjs"
+  publish = "production"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Permissions-Policy = "camera=(), geolocation=(), microphone=()"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/embedded/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/gallery-mosaic/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
